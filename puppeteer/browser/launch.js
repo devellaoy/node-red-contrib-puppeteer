@@ -21,6 +21,7 @@ module.exports = function (RED) {
               browser: await puppeteer.connect({
                 ...nodeConfig,
                 browserURL: `http://127.0.0.1:${nodeConfig.debugport}`,
+                args: [`--no-sandbox`],
               }),
             };
 
@@ -40,7 +41,7 @@ module.exports = function (RED) {
             msg.puppeteer = {
               browser: await puppeteer.launch({
                 ...nodeConfig,
-                args: [`--remote-debugging-port=${nodeConfig.debugport}`],
+                args: [`--remote-debugging-port=${nodeConfig.debugport}`, `--no-sandbox`],
               }),
             };
             // Browser launched sucessfully
@@ -54,7 +55,7 @@ module.exports = function (RED) {
           msg.puppeteer = {
             browser: await puppeteer.launch({
               ...nodeConfig,
-              args: [`--remote-debugging-port=${nodeConfig.debugport}`],
+              args: [`--remote-debugging-port=${nodeConfig.debugport}`, `--no-sandbox`],
             }),
           };
           // Browser launched sucessfully
